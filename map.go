@@ -4,6 +4,7 @@ import (
 	"unicode/utf8"
 )
 
+// Map applies a function to each rune in the string, returning a new string
 func (s String) Map(fn func(r rune) rune) String {
 	b := NewBuilder()
 

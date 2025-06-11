@@ -9,7 +9,7 @@ func (s String) Split(sep string) []string {
 
 func split(s, sep string, sepSave, n int) []string {
 	if n == 0 {
-		return nil
+		return []string{}
 	}
 	if sep == "" {
 		return explode(s, n)

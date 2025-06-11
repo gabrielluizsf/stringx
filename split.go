@@ -4,15 +4,18 @@ import "unicode/utf8"
 
 // Split splits the string s into substrings separated by sep.
 func (s String) Split(sep string) []string {
-	return split(s.String(), sep, 0, -1)
+	return split(s, sep, 0, -1)
 }
 
-func split(s, sep string, sepSave, n int) []string {
+func split(s String, sep string, sepSave, n int) []string {
+	if !s.Includes(sep) {
+		return []string{s.String()}
+	}
 	if n == 0 {
 		return []string{}
 	}
 	if sep == "" {
-		return explode(s, n)
+		return explode(s.String(), n)
 	}
 	if n < 0 {
 		n = String(s).Count(sep) + 1
@@ -29,11 +32,11 @@ func split(s, sep string, sepSave, n int) []string {
 		if m < 0 {
 			break
 		}
-		a[i] = s[:m+sepSave]
+		a[i] = s.String()[:m+sepSave]
 		s = s[m+len(sep):]
 		i++
 	}
-	a[i] = s
+	a[i] = s.String()
 	return a[:i+1]
 }
 

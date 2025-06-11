@@ -15,7 +15,11 @@ func (s String) Search(regex string) []string {
 }
 
 func (s String) IndexOf(substr string) int {
-	return s.mustCompile(regexp.QuoteMeta(substr)).FindStringIndex(s.String())[0]
+	indexes := s.mustCompile(regexp.QuoteMeta(substr)).FindStringIndex(s.String())
+	if indexes == nil {
+		return -1
+	}
+	return indexes[0]
 }
 
 func (s String) Replace(old, new string) String {

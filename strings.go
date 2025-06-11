@@ -3,9 +3,17 @@ package stringx
 type Strings []String
 
 func ConvertMany(s ...Stringer) Strings {
-	ss := make(Strings, len(s))
+	ss := make(Strings, 0)
 	for _, str := range s {
 		ss = append(ss, Convert(str))
+	}
+	return ss
+}
+
+func ConvertStrings(s ...string) Strings {
+	ss := make(Strings, 0)
+	for _, str := range s {
+		ss = append(ss, String(str))
 	}
 	return ss
 }

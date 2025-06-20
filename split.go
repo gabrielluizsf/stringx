@@ -49,7 +49,7 @@ func explode(s string, n int) []string {
 		n = l
 	}
 	a := make([]string, n)
-	for i := 0; i < n-1; i++ {
+	for i := range n - 1 {
 		_, size := utf8.DecodeRuneInString(s)
 		a[i] = s[:size]
 		s = s[size:]

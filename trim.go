@@ -149,7 +149,7 @@ type asciiSet [8]uint32
 // makeASCIISet creates a set of ASCII characters and reports whether all
 // characters in chars are ASCII.
 func makeASCIISet(chars string) (as asciiSet, ok bool) {
-	for i := 0; i < len(chars); i++ {
+	for i := range len(chars) {
 		c := chars[i]
 		if c >= utf8.RuneSelf {
 			return as, false

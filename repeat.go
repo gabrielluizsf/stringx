@@ -1,6 +1,9 @@
 package stringx
 
-import "math/bits"
+import (
+	"math/bits"
+	"strings"
+)
 
 // Repeat returns a new String by repeating the specified `value` string
 // `count` times and concatenating the result to the original String `s`.
@@ -41,28 +44,28 @@ func repeat(value string, count int) String {
 	if concatLength == 0 {
 		return Empty
 	}
-	repeatedCount := 64 * 2
 
 	var (
-		repeatedSpaces = Empty.Repeat(" ", repeatedCount)
-		repeatedDashes = Empty.Repeat("-", repeatedCount)
-		repeatedZeroes = Empty.Repeat("0", repeatedCount)
-		repeatedEquals = Empty.Repeat("=", repeatedCount)
-		repeatedTabs   = Empty.Repeat("\t", repeatedCount)
+		repeatedCount  = 64 * 2
+		repeatedSpaces = strings.Repeat(" ", repeatedCount)
+		repeatedDashes = strings.Repeat("-", repeatedCount)
+		repeatedZeroes = strings.Repeat("0", repeatedCount)
+		repeatedEquals = strings.Repeat("=", repeatedCount)
+		repeatedTabs   = strings.Repeat("\t", repeatedCount)
 	)
 	switch value[0] {
 	case ' ', '-', '0', '=', '\t':
 		switch {
-		case n <= repeatedSpaces.Length() && repeatedSpaces.HasPrefix(value):
-			return repeatedSpaces[:n]
-		case n <= repeatedDashes.Length() && repeatedDashes.HasPrefix(value):
-			return repeatedDashes[:n]
-		case n <= repeatedZeroes.Length() && repeatedZeroes.HasPrefix(value):
-			return repeatedZeroes[:n]
-		case n <= repeatedEquals.Length() && repeatedEquals.HasPrefix(value):
-			return repeatedEquals[:n]
-		case n <= repeatedTabs.Length() && repeatedTabs.HasPrefix(value):
-			return repeatedTabs[:n]
+		case n <= String(repeatedSpaces).Length() && String(repeatedSpaces).HasPrefix(value):
+			return String(repeatedSpaces)[:n]
+		case n <= String(repeatedDashes).Length() && String(repeatedDashes).HasPrefix(value):
+			return String(repeatedDashes)[:n]
+		case n <= String(repeatedZeroes).Length() && String(repeatedZeroes).HasPrefix(value):
+			return String(repeatedZeroes)[:n]
+		case n <= String(repeatedEquals).Length() && String(repeatedEquals).HasPrefix(value):
+			return String(repeatedEquals)[:n]
+		case n <= String(repeatedTabs).Length() && String(repeatedTabs).HasPrefix(value):
+			return String(repeatedTabs)[:n]
 		}
 	}
 

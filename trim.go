@@ -1,6 +1,8 @@
 package stringx
 
-import "unicode/utf8"
+import (
+	"unicode/utf8"
+)
 
 // Trim removes all leading and trailing characters in cutset from the string.
 func (s String) Trim(cutset string) (result String) {
@@ -180,7 +182,7 @@ func trimLeftUnicode(s, cutset string) string {
 		if r >= utf8.RuneSelf {
 			r, n = utf8.DecodeRuneInString(s)
 		}
-		if String(cutset).Includes(string(r)) {
+		if !String(cutset).Includes(string(r)) {
 			break
 		}
 		s = s[n:]

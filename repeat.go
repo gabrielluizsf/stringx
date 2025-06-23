@@ -24,6 +24,26 @@ func (s String) Repeat(value string, count int) String {
 	return s.Concat(repeat(value, count))
 }
 
+var (
+	// Space is the space character.
+	Space = String(" ")
+
+	// Dash is the dash character.
+	Dash = String("-")
+
+	// Zero is the zero character
+	Zero = String("0")
+
+	// Equals is the equals character
+	Equals = String("=")
+
+	// Tab is the tab character.
+	Tab = String("\t")
+
+	// Plus is the plus character.
+	Plus = String("+")
+)
+
 func repeat(value string, count int) String {
 	switch count {
 	case 0:
@@ -47,14 +67,17 @@ func repeat(value string, count int) String {
 
 	var (
 		repeatedCount  = 64 * 2
-		repeatedSpaces = strings.Repeat(" ", repeatedCount)
-		repeatedDashes = strings.Repeat("-", repeatedCount)
-		repeatedZeroes = strings.Repeat("0", repeatedCount)
-		repeatedEquals = strings.Repeat("=", repeatedCount)
-		repeatedTabs   = strings.Repeat("\t", repeatedCount)
+		repeatedSpaces = strings.Repeat(Space.String(), repeatedCount)
+		repeatedDashes = strings.Repeat(Dash.String(), repeatedCount)
+		repeatedZeroes = strings.Repeat(Zero.String(), repeatedCount)
+		repeatedEquals = strings.Repeat(Equals.String(), repeatedCount)
+		repeatedTabs   = strings.Repeat(Tab.String(), repeatedCount)
 	)
-	switch value[0] {
-	case ' ', '-', '0', '=', '\t':
+	index := 0
+	switch value[index] {
+	case Space.Bytes()[index], Dash.Bytes()[index],
+		Zero.Bytes()[index], Equals.Bytes()[index],
+		Tab.Bytes()[index]:
 		switch {
 		case n <= String(repeatedSpaces).Length() && String(repeatedSpaces).HasPrefix(value):
 			return String(repeatedSpaces)[:n]

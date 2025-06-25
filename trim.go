@@ -182,7 +182,7 @@ func trimLeftUnicode(s, cutset string) string {
 		if r >= utf8.RuneSelf {
 			r, n = utf8.DecodeRuneInString(s)
 		}
-		if !String(cutset).Includes(string(r)) {
+		if !includes(cutset, r) {
 			break
 		}
 		s = s[n:]
@@ -213,10 +213,19 @@ func trimRightUnicode(s, cutset string) string {
 		if r >= utf8.RuneSelf {
 			r, n = utf8.DecodeLastRuneInString(s)
 		}
-		if !String(cutset).Includes(string(r)) {
+		if !includes(cutset, r) {
 			break
 		}
 		s = s[:len(s)-n]
 	}
 	return s
+}
+
+func includes(s string, r rune) bool {
+	for _, c := range s {
+		if c == r {
+			return true
+		}
+	}
+	return false
 }

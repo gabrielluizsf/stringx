@@ -1,6 +1,8 @@
 package stringx
 
-import "errors"
+import (
+	"errors"
+)
 
 // Replacer is a struct that holds a String and two slices of strings for replacement.
 type Replacer struct {
@@ -12,6 +14,29 @@ type Replacer struct {
 // NewReplacer creates a new Replacer instance with the provided String and slices of old and new strings.
 func NewReplacer(s String, old []string, new []string) *Replacer {
 	return &Replacer{s: s, old: old, new: new}
+}
+
+// Replace performs the replacement of old strings with new strings in the String.
+func (s String) Replace(old, new string) String {
+	buf := &Builder{}
+	finder := makeStringFinder(old)
+	i, matched := 0, false
+	for {
+		match := finder.next(s.String()[i:])
+		if match == -1 {
+			break
+		}
+		matched = true
+		buf.Grow(match + len(new))
+		buf.WriteString(s.String()[i : i+match])
+		buf.WriteString(new)
+		i += match + len(finder.pattern)
+	}
+	if !matched {
+		return s
+	}
+	buf.WriteString(s.String()[i:])
+	return Convert(buf)
 }
 
 var (
@@ -29,8 +54,10 @@ func (r *Replacer) Replace() (string, error) {
 	if len(r.old) == 0 || len(r.new) == 0 {
 		return r.s.String(), ErrOldOrNewCannotBeEmpty
 	}
+
+	original := r.s
 	for i, old := range r.old {
-		r.s = r.s.Replace(old, r.new[i])
+		original = String(original).Replace(old, r.new[i])
 	}
-	return r.s.String(), nil
+	return original.String(), nil
 }

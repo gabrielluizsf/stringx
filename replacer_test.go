@@ -14,5 +14,6 @@ func TestReplacer(t *testing.T) {
 			t.Fatal(err)
 		}
 		assert.StrictEqual(t, replaced, "hi universe")
+		assert.Equal(t, String("Hello World").Replace("World", "Universe"), "Hello Universe")
 	})
 }

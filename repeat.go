@@ -2,7 +2,6 @@ package stringx
 
 import (
 	"math/bits"
-	"strings"
 )
 
 // Repeat returns a new String by repeating the specified `value` string
@@ -64,34 +63,6 @@ func repeat(value string, count int) String {
 	if concatLength == 0 {
 		return Empty
 	}
-
-	var (
-		repeatedCount  = 64 * 2
-		repeatedSpaces = strings.Repeat(Space.String(), repeatedCount)
-		repeatedDashes = strings.Repeat(Dash.String(), repeatedCount)
-		repeatedZeroes = strings.Repeat(Zero.String(), repeatedCount)
-		repeatedEquals = strings.Repeat(Equals.String(), repeatedCount)
-		repeatedTabs   = strings.Repeat(Tab.String(), repeatedCount)
-	)
-	index := 0
-	switch value[index] {
-	case Space.Bytes()[index], Dash.Bytes()[index],
-		Zero.Bytes()[index], Equals.Bytes()[index],
-		Tab.Bytes()[index]:
-		switch {
-		case n <= String(repeatedSpaces).Length() && String(repeatedSpaces).HasPrefix(value):
-			return String(repeatedSpaces)[:n]
-		case n <= String(repeatedDashes).Length() && String(repeatedDashes).HasPrefix(value):
-			return String(repeatedDashes)[:n]
-		case n <= String(repeatedZeroes).Length() && String(repeatedZeroes).HasPrefix(value):
-			return String(repeatedZeroes)[:n]
-		case n <= String(repeatedEquals).Length() && String(repeatedEquals).HasPrefix(value):
-			return String(repeatedEquals)[:n]
-		case n <= String(repeatedTabs).Length() && String(repeatedTabs).HasPrefix(value):
-			return String(repeatedTabs)[:n]
-		}
-	}
-
 	const chunkLimit = 8 * 1024
 	chunkMax := n
 	if n > chunkLimit {

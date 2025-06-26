@@ -4,6 +4,23 @@ import (
 	"unicode/utf8"
 )
 
+// TrimSuffix removes all trailing characters in suffix from the string.
+func (s String) TrimSuffix(suffix string) (result String) {
+	if s.HasSuffix(suffix) {
+		return s[:len(s)-len(suffix)]
+	}
+	return s
+}
+
+// TrimPrefix removes all leading characters in prefix from the string.
+func (s String) TrimPrefix(prefix string) (result String) {
+	if s.HasPrefix(prefix) {
+		result = s[len(prefix):]
+		return
+	}
+	return s
+}
+
 // Trim removes all leading and trailing characters in cutset from the string.
 func (s String) Trim(cutset string) (result String) {
 	byteFn := func() String {

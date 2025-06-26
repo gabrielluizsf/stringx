@@ -27,6 +27,10 @@ func TestTrim(t *testing.T) {
 		{"Trim", "\x80test\xff", "\xff", "test"},
 		{"Trim", " Ġ ", " ", "Ġ"},
 		{"Trim", " Ġİ0", "0 ", "Ġİ"},
+		{"TrimPrefix", "aabb", "a", "abb"},
+		{"TrimPrefix", "aabb", "b", "aabb"},
+		{"TrimSuffix", "aabb", "a", "aabb"},
+		{"TrimSuffix", "aabb", "b", "aab"},
 		//empty string tests
 		{"Trim", "abba", Empty.String(), "abba"},
 		{"Trim", Empty.String(), "123", Empty.String()},
@@ -54,6 +58,14 @@ func TestTrim(t *testing.T) {
 		case "TrimRight":
 			f = func(s1, s2 string) string {
 				return String(s1).TrimEnd(s2).String()
+			}
+		case "TrimPrefix":
+			f = func(s1, s2 string) string {
+				return String(s1).TrimPrefix(s2).String()
+			}
+		case "TrimSuffix":
+			f = func(s1, s2 string) string {
+				return String(s1).TrimSuffix(s2).String()
 			}
 		default:
 			t.Errorf("Undefined trim function %s", name)

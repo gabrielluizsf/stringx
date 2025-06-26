@@ -14,4 +14,5 @@ func TestSplit(t *testing.T) {
 	result := String("github.com/i9si/atendi9api/internal/server/handler/whatsapp.processLicensePlate").Split(".")
 	expected := []string{"github", "com/i9si/atendi9api/internal/server/handler/whatsapp", "processLicensePlate"}
 	assert.Equal(t, result, expected)
+	assert.Equal(t, s.SplitN(", ", 2), []string{"a", "b, c"})
 }

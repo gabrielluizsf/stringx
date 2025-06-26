@@ -7,6 +7,16 @@ func (s String) Split(sep string) []string {
 	return split(s, sep, 0, -1)
 }
 
+// SplitN splits the string s into substrings separated by sep.
+// 	- sep: the separator.
+// 	- n: the maximum number of substrings to return.
+// Example:
+//	s := stringx.String("Hello, World !")
+//	s.SplitN(stringx.Space.String(), 2) // ["Hello", "World !"]
+func (s String) SplitN(sep string, n int) []string {
+	return split(s, sep, 0, n)
+}
+
 func split(s String, sep string, sepSave, n int) []string {
 	if !s.Includes(sep) {
 		return []string{s.String()}

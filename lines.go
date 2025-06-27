@@ -8,9 +8,10 @@ func (s String) Lines() iter.Seq[string] {
 		for len(s) > 0 {
 			var line string
 			if i := s.IndexOf(NewLine.String()); i >= 0 {
-				line, s = s.String()[:i+1], s[i+1:]
+				index := i + 1
+				line, s = s.String()[:index], s[index:]
 			} else {
-				line, s = s.String(), ""
+				line, s = s.String(), Empty
 			}
 			if !yield(line) {
 				return

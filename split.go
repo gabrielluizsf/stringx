@@ -24,7 +24,7 @@ func split(s String, sep string, sepSave, n int) []string {
 	if n == 0 {
 		return []string{}
 	}
-	if sep == "" {
+	if Empty.Equal(sep) {
 		return explode(s.String(), n)
 	}
 	if n < 0 {

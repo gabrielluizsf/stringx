@@ -13,9 +13,9 @@ func TestTrim(t *testing.T) {
 		in, arg, out string
 	}{
 		{"Trim", "abba", "a", "bb"},
-		{"Trim", "abba", "ab", ""},
-		{"TrimLeft", "abba", "ab", ""},
-		{"TrimRight", "abba", "ab", ""},
+		{"Trim", "abba", "ab", Empty.String()},
+		{"TrimLeft", "abba", "ab", Empty.String()},
+		{"TrimRight", "abba", "ab", Empty.String()},
 		{"TrimLeft", "abba", "a", "bba"},
 		{"TrimLeft", "abba", "b", "abba"},
 		{"TrimRight", "abba", "a", "abb"},

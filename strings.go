@@ -21,7 +21,7 @@ func ConvertStrings(s ...string) Strings {
 func (s Strings) Join(sep string) String {
 	switch len(s) {
 	case 0:
-		return ""
+		return Empty
 	case 1:
 		return s[0]
 	}

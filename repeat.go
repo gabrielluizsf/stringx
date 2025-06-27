@@ -41,6 +41,9 @@ var (
 
 	// Plus is the plus character.
 	Plus = String("+")
+
+	// NewLine is the newline character.	
+	NewLine = String("\n")
 )
 
 func repeat(value string, count int) String {

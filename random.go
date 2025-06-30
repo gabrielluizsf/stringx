@@ -1,6 +1,9 @@
 package stringx
 
-import "math/rand"
+import (
+	"math/rand"
+	"time"
+)
 
 // Random defines an interface for selecting a random element from a string collection.
 type Random interface {
@@ -26,8 +29,11 @@ type random struct {
 // NewRandomString creates a new Random instance from a list of strings.
 func NewRandomString(s ...string) Random {
 	return random{
-		s:  ConvertStrings(s...), // Converts values to the Strings type
-		fn: rand.Intn,            // Uses the default function for random number generation
+		s: ConvertStrings(s...), // Converts values to the Strings type
+		fn: func(len int) int {
+			rand.New(rand.NewSource(int64(len))).Seed(time.Now().UnixNano())
+			return rand.Intn(len)
+		}, // Uses the default function for random number generation
 	}
 }
 

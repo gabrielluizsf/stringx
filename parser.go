@@ -105,6 +105,11 @@ func (p *Parser) Int() (n int64, err error) {
 				return a / b, nil
 			})
 		}},
+		{"%", func(a, b string) (int64, error) {
+			return execute(a, b, parseInt, func(a, b int64) (int64, error) {
+				return a % b, nil
+			})
+		}},
 	}
 	for _, op := range ops {
 		if v, err := op.run(s); err == nil {
@@ -141,6 +146,16 @@ func (p *Parser) Float() (n float64, err error) {
 				return a / b, nil
 			})
 		}},
+		{"%", func(a, b string) (float64, error) {
+			return execute(a, b, parseFloat, func(a, b float64) (float64, error) {
+				return float64(int64(a) % int64(b)), nil
+			})
+		}},
+	}
+	for _, op := range ops {
+		if v, err := op.run(s); err == nil {
+			return v, nil
+		}
 	}
 	for _, op := range ops {
 		if v, err := op.run(s); err == nil {

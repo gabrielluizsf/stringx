@@ -13,6 +13,11 @@ func (s String) Concat(str ...Stringer) String {
 	return s + ConvertMany(str...).Join(Empty.String())
 }
 
+// ConcatStrings concatenates the String with other strings.
+func (s String) ConcatStrings(str ...string) String {
+	return s + String(ConvertStrings(str...).Join(Empty.String()))
+}
+
 // Bytes returns the byte slice representation of the String.
 func (s String) Bytes() []byte {
 	return []byte(s.String())

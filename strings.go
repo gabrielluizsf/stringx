@@ -29,13 +29,13 @@ func (s Strings) Join(sep string) String {
 	var n int
 	if len(sep) > 0 {
 		if len(sep) >= maxInt/(len(s)-1) {
-			panic("stringx: Join output length overflow")
+			return fail("stringx: Join output length overflow", Empty, Log)
 		}
 		n += len(sep) * (len(s) - 1)
 	}
 	for _, elem := range s {
 		if len(elem) > maxInt-n {
-			panic("stringx: Join output length overflow")
+			return fail("stringx: Join output length overflow", Empty, Log)
 		}
 		n += len(elem)
 	}

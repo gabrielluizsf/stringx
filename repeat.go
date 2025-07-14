@@ -54,12 +54,12 @@ func repeat(value string, count int) String {
 		return String(value)
 	}
 	if count < 0 {
-		panic("stringx: negative Repeat count")
+		return fail("stringx: negative Repeat count", String(value), Log)
 	}
 	concatLength := len(value) * count
 	hi, lo := bits.Mul(uint(len(value)), uint(count))
 	if hi > 0 || lo > uint(maxInt) {
-		panic("stringx: Repeat output length overflow")
+		return fail("stringx: Repeat output length overflow", String(value), Log)
 	}
 	n := int(lo)
 

@@ -53,11 +53,11 @@ func (b *Builder) grow() {
 }
 
 // Grow grows b's capacity, if necessary, to guarantee space for
-// another n bytes. After Grow(n), at least n bytes can be written to b
-// without another allocation. If n is negative, Grow panics.
+// another n bytes.
 func (b *Builder) Grow(n int) {
 	if n < 0 {
-		panic("stringx.Builder.Grow: negative count")
+		fail("stringx.Builder.Grow: negative count", Empty, Log)
+		return
 	}
 	if cap(b.buf)-len(b.buf) < n {
 		b.grow()

@@ -19,4 +19,11 @@ func TestReverse(t *testing.T) {
 		reversed = reversed.Concat(String(n).Reverse().Reverse(), Dash)
 	}
 	assert.Equal(t, reversed.String(), "08-06-2014")
+	s = String("Hello World")
+	assert.Equal(t, s.ReverseFn(func(i int) String {
+		if Space.Equal(string(s[i])) {
+			return Dash
+		}
+		return String(string(s[i]))
+	}), "dlroW-olleH")
 }

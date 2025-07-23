@@ -4,8 +4,16 @@ import (
 	"unicode/utf8"
 )
 
+// MapFn defines a function type that takes a rune and returns a rune.
+type MapFn func(r rune) rune
+
 // Map applies a function to each rune in the string, returning a new string
-func (s String) Map(fn func(r rune) rune) String {
+func (s String) Map(fn MapFn) String {
+	return Map(s, fn)
+}
+
+// Map applies a function to each rune in the string, returning a new string
+func Map(s String, fn MapFn) String {
 	b := NewBuilder()
 
 	for i, c := range s {

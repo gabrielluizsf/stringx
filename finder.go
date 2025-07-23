@@ -4,7 +4,12 @@ import "unicode/utf8"
 
 // IndexOf returns the index of the first occurrence of substr in s, or -1 if substr is not present in s.
 func (s String) IndexOf(substr string) int {
-	return makeStringFinder(substr).next(s.String())
+	return IndexOf(s.String(), substr)
+}
+
+// IndexOf returns the index of the first occurrence of substr in s, or -1 if substr is not present in s.
+func IndexOf(s, substr string) int {
+	return makeStringFinder(substr).next(s)
 }
 
 // Includes checks if the string s contains the substring substr.

@@ -5,5 +5,10 @@ var Empty = String("")
 
 // IsEmpty returns true if the string is empty.
 func (s String) IsEmpty() bool {
-	return Empty.Equal(s.String())
+	return IsEmpty(s.String())
+}
+
+// IsEmpty checks if the given string is empty.
+func IsEmpty(s string) bool {
+	return len(s) == 0
 }

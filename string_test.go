@@ -7,26 +7,26 @@ import (
 )
 
 func TestString(t *testing.T) {
-	assert.Equal(t, String("Hello World").String(), "Hello World")
+	assert.Equal(t, New("Hello World").String(), "Hello World")
 	t.Run("Concat", func(t *testing.T) {
-		assert.Equal(t, String("Hello").Concat(
+		assert.Equal(t, New("Hello").Concat(
 			Space,
 			String("World"),
 		), "Hello World")
 	})
 	t.Run("ConcatStrings", func(t *testing.T) {
-		assert.Equal(t, String("Hello").ConcatStrings(
+		assert.Equal(t, New("Hello").ConcatStrings(
 			Space.String(),
 			"World",
 		), "Hello World")
 	})
 	t.Run("Bytes", func(t *testing.T) {
-		assert.Equal(t, String("Hello World").Bytes(), []byte("Hello World"))
+		assert.Equal(t, New("Hello World").Bytes(), []byte("Hello World"))
 	})
 	t.Run("Runes", func(t *testing.T) {
-		assert.Equal(t, String("Hello World").Runes(), []rune("Hello World"))
+		assert.Equal(t, New("Hello World").Runes(), []rune("Hello World"))
 	})
 	t.Run("CharAt", func(t *testing.T) {
-		assert.Equal(t, String("Hello World").CharAt(0), String("H"))
+		assert.Equal(t, New("Hello World").CharAt(0), String("H"))
 	})
 }

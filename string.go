@@ -3,6 +3,17 @@ package stringx
 // String is a functional string type.
 type String string
 
+// New creates a new String from any type that implements Stringer or is a string.
+func New(s any) String {
+	if v, ok := s.(Stringer); ok {
+		return Convert(v)
+	}
+	if v, ok := s.(string); ok {
+		return String(v)
+	}
+	return fail("stringx: cannot convert to String", Empty, Log)
+}
+
 // String returns the string representation of the String.
 func (s String) String() string {
 	return string(s)

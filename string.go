@@ -8,6 +8,9 @@ func New(s any) String {
 	if v, ok := s.(Stringer); ok {
 		return Convert(v)
 	}
+	if v, ok := s.([]byte); ok {
+		return String(string(v))
+	}
 	if v, ok := s.(string); ok {
 		return String(v)
 	}

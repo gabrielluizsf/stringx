@@ -4,6 +4,12 @@ package stringx
 type String string
 
 // New creates a new String from any type that implements Stringer or is a string.
+//
+//   stringx.New("hello") // String("hello")
+//   stringx.New([]byte("hello")) // String("hello")	
+//   type NumberStr int
+//   func (n NumberStr) String() string { return fmt.Sprint(n) }
+//   stringx.New(NumberStr(123)) // String("123")
 func New(s any) String {
 	if v, ok := s.(Stringer); ok {
 		return Convert(v)

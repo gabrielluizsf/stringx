@@ -123,6 +123,10 @@ func (p *Parser) Int() (n int64, err error) {
 func (p *Parser) Float() (n float64, err error) {
 	s := p.s
 	parseFloat := func(s string) (float64, error) {
+		old := ","
+		if New(s).Includes(old) {
+			s = New(s).Replace(old, ".").String()
+		}
 		return strconv.ParseFloat(s, p.bitSize)
 	}
 	ops := []mathOp[float64]{

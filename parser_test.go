@@ -49,9 +49,9 @@ func TestParser(t *testing.T) {
 	})
 
 	t.Run("Floats", func(t *testing.T) {
-		assert.Equal(t, mustFloat("10.0"), 10.0)
+		assert.Equal(t, mustFloat("10,0"), 10.0)
 		assert.Equal(t, mustFloat("10 + 10.0"), 20.0)
-		assert.Equal(t, mustFloat("10.0 * 20.0"), 200.0)
+		assert.Equal(t, mustFloat("10,0 * 20.0"), 200.0)
 		assert.Equal(t, mustFloat("10.0 - 20.0"), -10.0)
 		assert.Equal(t, mustFloat("10.0 / 20"), 0.5)
 		assert.Equal(t, mustFloat("10 % 20"), 10)
